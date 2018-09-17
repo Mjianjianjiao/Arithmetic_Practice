@@ -1,0 +1,71 @@
+###对存放有n个数据的顺序表进行递归操作
+
+- 求顺序表中的最大值
+- 求顺序表中的最小值
+- 求顺序表中的值的和
+- 求顺序表中值的积
+- 求顺序表中值的平均值
+```
+#include <stdio.h>
+#include <assert.h>
+typedef int DataType;
+DataType FindMaxNumR(int* list,int n)//找顺序表中最大值
+{
+	assert(list);
+	assert(n>=0);
+	int max;
+	if (n==0)
+		return list[n];
+	 max= FindMaxNumR(list, n - 1);
+	return list[n]>max ? list[n] : max;
+}
+DataType FindMinNUMR(int* list,int n)  //找最小值
+{
+	assert(list);
+	assert(n >= 0);
+	if (n < 0)
+		return;
+	int min;
+	if (n==0)
+		return list[n];
+	min = FindMinNUMR(list,n-1);
+	return list[n] < min ? list[n] : min;
+}
+DataType ProR(int* list, int n)  //求乘积
+{
+	assert(list);
+	assert(n >= 0);
+	if (n==0)
+		return list[n];
+	return ProR(list, n - 1)*list[n];
+}
+DataType SumR(int* list, int n)  //求和
+{
+	assert(list);
+	assert(n >= 0);
+	if (n == 0)
+		return list[n];
+	return SumR(list, n - 1) + list[n];
+}
+float  AveNumR(int* list, int n) //求平均值
+{
+	assert(list);
+	assert(n >= 0);
+	if (n == 0)
+		return list[n];
+	return (AveNumR(list,n-1)*n + list[n]) / (n+1);//
+	整个数据划分为两部分，求所有数的平均值即求当前位置的数和前面的所有数的和的平均值，将其进行划分，从前求到后
+}
+
+int main()
+{
+	int a[] = {1,2,3,4,5,6,7,8};
+	int n = sizeof(a) / sizeof(a[0]);
+	printf("%d\n", FindMaxNumR(a,n-1));
+	printf("%d\n", FindMinNUMR(a,n-1));
+	printf("%d\n", ProR(a, n-1));
+	printf("%d\n", SumR(a,n-1));
+	printf("%f\n", AveNumR(a, n-1));
+	return 0;
+}
+```
