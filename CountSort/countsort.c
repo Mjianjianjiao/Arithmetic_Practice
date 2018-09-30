@@ -23,7 +23,7 @@ void CountSort(int* a,int n)
     if(count==NULL)
           return;
     memset(count,0,sizeof(int)*(max-min+1));
-   // 
+    
     for(i=0;i<n;i++) 
      count[a[i]-min]++;
     
